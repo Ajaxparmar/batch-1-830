@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <label for="Fname">First Name</label>
+        <input type="text" id="Fname" name="Fname" placeholder="Enter the name" autofocus><br><br>
+        <label for="Lname">Lname</label>
+        <input type="text" value="kumar" readonly name="Lname" id="Lname" placeholder="Enter the name"><br><br>
+
+        <label for="email">Email</label>
+        <input type="email" placeholder="Enter the email" name="email" id="email"><br><br>
+
+        <label for="DOB">DOB</label>
+        <input type="date" name="DOB" id="DOB"><br><br>
+
+        <label for="phone">Phone</label>
+        <input type="tel" name="phone" id="phone" placeholder="Enter the phone number"><br><br>
+
+        <label for="Gender">Gender</label>
+        <input type="radio" name="Gender" id="Male" value="Male">
+        <label for="Male">Male</label>
+        <input type="radio" name="Gender" checked id="Female" value="Female">
+        <label for="Female">Female</label><br><br>
+
+        <label for="Subject">Select Subject</label>
+        <input type="checkbox" name="sub1" id="" checked>HTML
+        <input type="checkbox" name="sub2" id="">CSS
+        <input type="checkbox" name="sub3" id="">JS
+        <br><br>
+        <label for="city">Select City</label>
+
+        <select name="city">
+            <optgroup label="HR">
+                <option value="jin">Jind</option>
+                <option value="Hir">Hisar</option>
+                <option value="roh">Rohtak</option>
+                <option>Uchana</option>
+            </optgroup>
+            <optgroup label="PUB">
+                <option value="jin">Amritser</option>
+                <option value="Hir">Bhatinda</option>
+                <option value="roh">Rohtak</option>
+                <option>Uchana</option>
+            </optgroup>
+
+        </select>
+
+        <input list="mylist" >
+        <datalist id="mylist">
+            <option>Jind</option>
+            <option>Jidjd</option>
+            <option>Hisar</option>
+            <option>Rohtak</option>
+        </datalist>
+
+        <label for="address">address</label>
+        <textarea name="adress" cols="40" rows="4" id="">address:</textarea>
+        <br><br>
+        <label for="password">password</label>
+        <input type="password" name="password">
+        <br><br>
+        <label for="file">file:</label>
+        <input type="file" accept=".png,.jpg" multiple>
+        <br>
+        <br>
+        <input type="reset"><br>
+
+        <input type="range" max="1000" min="100" value="200" name="range">
+
+        <input type="color">
+        <input type="number">
+        <input type="month" name="submittime">
+        <button type="button">check</button>
+        <button>save</button>
+        <input type="button" value="submit">
+        <label for="url">url</label>
+        <input type="url">
+        <input type="search">
+
+
+        <input type="image" src="cat.png" width="300" >
+
+
+    </form>
+
+</body>
+
+</html>
