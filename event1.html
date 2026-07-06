@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let count = 0;
+        function countChar(event) {
+            let mytext=document.getElementById("mytext")
+            console.log(event);
+
+            if(event.code==='KeyV')
+                {
+                   let leng= mytext.value.length
+                   count=leng;
+                   
+                    
+                }
+            
+            if (event.key === 'Backspace') {
+                count--;
+            }
+            else{
+                count++;
+            }
+
+            if(count<10 || count>=150)
+            {
+                mytext.style.color="red";
+                document.getElementById("myBtn").setAttribute("disabled", "true");
+            }
+            else{
+                mytext.style.color="Green";
+                document.getElementById("myBtn").removeAttribute("disabled", "true");
+            }       
+            document.getElementById("count").innerHTML = count;
+        }
+    </script>
+</head>
+
+<body>
+
+    <div style="display: flex; justify-content: space-between; width: 400px;">
+        <p>Max 150 Char and Min 10 char</p>
+        <p id="count">0</p>
+    </div>
+    <textarea name="mytext" id="mytext" onkeydown="countChar(event)" cols="60" rows="10"></textarea>
+    <button id="myBtn">Save</button>
+</body>
+
+</html>
