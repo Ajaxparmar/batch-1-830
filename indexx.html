@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TrinityTouch AI Agent — Cost Breakdown</title>
+<style>
+  :root{
+    --bg:#0c0e12;
+    --card:#161920;
+    --card-border:#262a33;
+    --text:#eef0f3;
+    --muted:#9aa1ad;
+    --faint:#5f6673;
+    --rail:#2a2e37;
+
+    --c1:#6c7bff;   /* phase 1 - scraping */
+    --c2:#28c79a;   /* phase 2 - knowledge base */
+    --c3:#f2b84b;   /* phase 3 - chatbot brain */
+    --c4:#ef6f5c;   /* phase 4 - deploy */
+    --c5:#7fd858;   /* phase 5 - bonus */
+    --cv:#9b8bff;   /* prebuilt vendors */
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:28px 18px 60px;
+  }
+
+  .wrap{max-width:880px;margin:0 auto;}
+
+  /* header */
+  .head{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    margin-bottom:30px;
+  }
+  .head-icon{
+    width:42px;height:42px;border-radius:50%;
+    background:#1d2230;
+    border:1px solid var(--card-border);
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;flex-shrink:0;
+  }
+  .head h1{font-size:21px;margin:0 0 4px;font-weight:700;letter-spacing:-0.01em;}
+  .head p{margin:0;color:var(--muted);font-size:13.5px;}
+
+  /* top summary strip */
+  .summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:34px;
+  }
+  .summary .box{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    padding:14px 16px;
+  }
+  .summary .box .lbl{font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+  .summary .box .val{font-size:18px;font-weight:700;}
+  .summary .box .sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
+
+  /* timeline */
+  .timeline{position:relative;padding-left:46px;}
+  .rail{
+    position:absolute;left:20px;top:6px;bottom:6px;width:1px;
+    background:var(--rail);
+  }
+
+  .phase{position:relative;margin-bottom:34px;}
+  .node{
+    position:absolute;left:-46px;top:0;
+    width:40px;height:40px;border-radius:50%;
+    background:#11141a;
+    border:2px solid var(--phase-color);
+    display:flex;align-items:center;justify-content:center;
+    font-size:17px;
+  }
+  .phase-head{
+    display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;
+  }
+  .pill{
+    font-size:11px;font-weight:700;
+    padding:3px 9px;border-radius:20px;
+    color:#0c0e12;
+    background:var(--phase-color);
+  }
+  .phase-title{font-size:16px;font-weight:700;}
+  .phase-week{margin-left:auto;font-size:12px;color:var(--faint);}
+
+  .cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  @media (max-width:560px){.cards{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    padding:13px 14px;
+  }
+  .card .ct{
+    font-size:13.5px;font-weight:700;margin-bottom:4px;
+    display:flex;justify-content:space-between;gap:8px;align-items:baseline;
+  }
+  .card .ct .price{
+    font-size:13px;font-weight:700;color:var(--phase-color);white-space:nowrap;
+  }
+  .card .cd{font-size:12.5px;color:var(--muted);line-height:1.45;}
+
+  .tools{
+    border-left:3px solid var(--phase-color);
+    background:#13151b;
+    border-radius:6px;
+    padding:9px 13px;
+    font-size:12px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .tools .total{color:var(--phase-color);font-weight:700;white-space:nowrap;}
+
+  /* provider comparison table (phase 3 only) */
+  .provtable{
+    width:100%;
+    border-collapse:collapse;
+    margin:4px 0 10px;
+    font-size:12.5px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .provtable th{
+    text-align:left;
+    background:#1b1e26;
+    color:var(--faint);
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    padding:9px 12px;
+    font-weight:600;
+  }
+  .provtable td{
+    padding:9px 12px;
+    border-top:1px solid var(--card-border);
+    color:var(--text);
+  }
+  .provtable td.muted{color:var(--muted);font-size:12px;}
+  .provtable tr.best td:first-child{color:var(--c3);font-weight:700;}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;}
+
+  /* final rollup */
+  .rollup{
+    margin-top:8px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:12px;
+    padding:18px 18px 6px;
+  }
+  .rollup h2{font-size:15px;margin:0 0 12px;}
+  .rollup table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .rollup th{
+    text-align:left;color:var(--faint);font-size:10.5px;
+    text-transform:uppercase;letter-spacing:.03em;
+    padding:0 10px 8px 0;font-weight:600;
+  }
+  .rollup th.num,.rollup td.num{text-align:right;}
+  .rollup td{padding:9px 10px 9px 0;border-top:1px solid var(--card-border);}
+  .rollup tr:last-child td{font-weight:700;border-top:1px solid var(--rail);color:var(--text);}
+  .rollup .swatch{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:8px;}
+
+  /* vendor section */
+  .vendors{margin-top:34px;}
+  .vendor-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+    margin-top:12px;
+  }
+  @media (max-width:680px){.vendor-row{grid-template-columns:1fr;}}
+  .vcard{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    padding:14px 15px;
+  }
+  .vcard .vname{font-size:14px;font-weight:700;margin-bottom:3px;}
+  .vcard .vprice{font-size:12px;color:var(--cv);font-weight:700;margin-bottom:8px;}
+  .vcard .vdesc{font-size:12px;color:var(--muted);line-height:1.5;}
+
+  .foot-note{
+    margin-top:28px;
+    font-size:11.5px;
+    color:var(--faint);
+    border-top:1px solid var(--card-border);
+    padding-top:14px;
+    line-height:1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div class="head-icon">💰</div>
+    <div>
+      <h1>TrinityTouch AI Agent — Cost Breakdown</h1>
+      <p>Per-phase infra/API cost · medium-to-large catalog (~3,000–8,000 products) · 5,000–10,000 chats/month · no labor cost</p>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="box">
+      <div class="lbl">One-time setup</div>
+      <div class="val">$15 – $120</div>
+      <div class="sub">Scraping + embeddings</div>
+    </div>
+    <div class="box">
+      <div class="lbl">Recurring / month</div>
+      <div class="val">$100 – $1,000</div>
+      <div class="sub">Wide range — model choice + scale swings 10x</div>
+    </div>
+    <div class="box">
+      <div class="lbl">Pragmatic build</div>
+      <div class="val" style="color:var(--c3)">~$180 – $350</div>
+      <div class="sub">Mid-tier model baseline + Sonnet for recs</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="rail"></div>
+
+    <!-- PHASE 1 -->
+    <div class="phase" style="--phase-color:var(--c1)">
+      <div class="node">🌐</div>
+      <div class="phase-head">
+        <span class="pill">Phase 1</span>
+        <span class="phase-title">Website scraping &amp; data extraction</span>
+        <span class="phase-week">Week 1–2</span>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ct">Scraper hosting <span class="price">$10–30</span></div>
+          <div class="cd">Small VM (2–4vCPU/4–8GB), a few days, destroyed after crawl finishes</div>
+        </div>
+        <div class="card">
+          <div class="ct">Proxy / anti-bot <span class="price">$0–60</span></div>
+          <div class="cd">Residential/rotating proxy plan if target site blocks scrapers at this volume</div>
+        </div>
+        <div class="card">
+          <div class="ct">LLM-assisted cleanup <span class="price">$1–15</span></div>
+          <div class="cd">Structuring messy HTML via LLM instead of selectors, scaled to larger catalog</div>
+        </div>
+        <div class="card">
+          <div class="ct">Excel export <span class="price">Free</span></div>
+          <div class="cd">xlsx npm library, no API cost</div>
+        </div>
+      </div>
+      <div class="tools">
+        <span>Dominated by hosting/proxies, not AI cost</span>
+        <span class="total">≈ $15–105 one-time</span>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase" style="--phase-color:var(--c2)">
+      <div class="node">🗄️</div>
+      <div class="phase-head">
+        <span class="pill">Phase 2</span>
+        <span class="phase-title">Data cleaning &amp; knowledge base</span>
+        <span class="phase-week">Week 2–3</span>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ct">Embeddings (~8,000 products) <span class="price">$0.10–0.60</span></div>
+          <div class="cd">text-embedding-3-small ≈ $0.10 total · 3-large ≈ $0.60 total · one-time</div>
+        </div>
+        <div class="card">
+          <div class="ct">Vector DB storage <span class="price">$25–75/mo</span></div>
+          <div class="cd">Paid Supabase pgvector or Pinecone tier once you're past free-tier limits</div>
+        </div>
+        <div class="card">
+          <div class="ct">SQL database <span class="price">$20–40/mo</span></div>
+          <div class="cd">Managed Postgres tier (Supabase Pro, RDS, etc.) for production reliability</div>
+        </div>
+        <div class="card">
+          <div class="ct">Categorisation <span class="price">$5–15/mo</span></div>
+          <div class="cd">Periodic re-categorisation passes as catalog grows/changes</div>
+        </div>
+      </div>
+      <div class="tools">
+        <span>8,000 products × ~600 tokens ≈ 4.8M tokens total</span>
+        <span class="total">≈ $50–130/mo recurring</span>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase" style="--phase-color:var(--c3)">
+      <div class="node">🧠</div>
+      <div class="phase-head">
+        <span class="pill">Phase 3</span>
+        <span class="phase-title">AI agent — RAG chatbot build</span>
+        <span class="phase-week">Week 3–5</span>
+      </div>
+
+      <table class="provtable">
+        <tr>
+          <th>Model</th>
+          <th>$ / 1M in · out</th>
+          <th>Cost / 8,000 chats/mo</th>
+          <th>Best for</th>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:#28c79a"></span>Gemini 2.5 Flash-Lite</td>
+          <td class="muted">$0.10 / $0.40</td>
+          <td>~$15</td>
+          <td class="muted">Cheapest — basic Q&amp;A, lead capture</td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:#6c7bff"></span>GPT-4o-mini</td>
+          <td class="muted">$0.15 / $0.60</td>
+          <td>~$22</td>
+          <td class="muted">Good balance, wide LangChain support</td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:#28c79a"></span>Gemini 2.5 Flash</td>
+          <td class="muted">$0.30 / $2.50</td>
+          <td>~$65</td>
+          <td class="muted">Better reasoning for compare/recommend</td>
+        </tr>
+        <tr>
+          <td><span class="dot" style="background:#f2b84b"></span>Claude Haiku 4.5</td>
+          <td class="muted">$1.00 / $5.00</td>
+          <td>~$215</td>
+          <td class="muted">Strong instructions, bilingual reliability</td>
+        </tr>
+        <tr class="best">
+          <td><span class="dot" style="background:#f2b84b"></span>Claude Sonnet 4.6</td>
+          <td class="muted">$3.00 / $15.00</td>
+          <td>~$650</td>
+          <td class="muted">Best for nuanced recommend + Hindi/English</td>
+        </tr>
+      </table>
+
+      <div class="cards">
+        <div class="card">
+          <div class="ct">Lead capture <span class="price">Folded in</span></div>
+          <div class="cd">Function-calling to save name/email/query — no extra token cost beyond chat</div>
+        </div>
+        <div class="card">
+          <div class="ct">Recommended setup <span class="price">$60–180/mo</span></div>
+          <div class="cd">Route simple lookups to budget model, escalate to Sonnet only for "compare &amp; recommend"</div>
+        </div>
+      </div>
+      <div class="tools">
+        <span>~40x spread between cheapest and flagship model — test budget tier first</span>
+        <span class="total">≈ $15–650/mo recurring</span>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase" style="--phase-color:var(--c4)">
+      <div class="node">🚀</div>
+      <div class="phase-head">
+        <span class="pill">Phase 4</span>
+        <span class="phase-title">Embed on website + admin panel</span>
+        <span class="phase-week">Week 5–6</span>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ct">Hosting (Next.js/Tailwind) <span class="price">$20–60/mo</span></div>
+          <div class="cd">Vercel Pro / dedicated server tier once traffic and the admin panel need more headroom than free tier</div>
+        </div>
+        <div class="card">
+          <div class="ct">Chat widget + export <span class="price">Free</span></div>
+          <div class="cd">Script-tag widget and xlsx/SQL export, no API cost</div>
+        </div>
+        <div class="card">
+          <div class="ct">WhatsApp alerts <span class="price">$25–90/mo</span></div>
+          <div class="cd">India utility-template rate ≈ ₹0.78/msg + BSP markup (Twilio adds ~$0.005/msg) on 8,000–10,000 leads/mo</div>
+        </div>
+        <div class="card">
+          <div class="ct">Number rental + BSP plan <span class="price">$10–40/mo</span></div>
+          <div class="cd">Twilio/BSP monthly phone number fee plus tiered WhatsApp BSP subscription</div>
+        </div>
+      </div>
+      <div class="tools">
+        <span>Business-initiated alerts bill per message — customer replies stay free</span>
+        <span class="total">≈ $55–190/mo recurring</span>
+      </div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase" style="--phase-color:var(--c5)">
+      <div class="node">📈</div>
+      <div class="phase-head">
+        <span class="pill">Phase 5</span>
+        <span class="phase-title">Bonus features &amp; growth</span>
+        <span class="phase-week">Ongoing</span>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ct">Auto re-scrape <span class="price">Free–$10</span></div>
+          <div class="cd">GitHub Actions free tier usually covers it; paid runners if crawls get long</div>
+        </div>
+        <div class="card">
+          <div class="ct">Analytics dashboard <span class="price">Free</span></div>
+          <div class="cd">Recharts/Chart.js — client-side, no API cost</div>
+        </div>
+        <div class="card">
+          <div class="ct">Voice queries <span class="price">$5–15</span></div>
+          <div class="cd">Browser Web Speech API is free; paid Whisper STT adds ~$0.006/min at this chat volume</div>
+        </div>
+        <div class="card">
+          <div class="ct">Email (transactional) <span class="price">$0–15</span></div>
+          <div class="cd">Own SMTP free, or SendGrid/Postmark paid tier once past free daily limits</div>
+        </div>
+      </div>
+      <div class="tools">
+        <span>Mostly free unless paid speech-to-text and email tiers are added</span>
+        <span class="total">≈ $5–40/mo recurring</span>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- ROLLUP -->
+  <div class="rollup">
+    <h2>Total cost roll-up</h2>
+    <table>
+      <tr>
+        <th>Phase</th>
+        <th class="num">One-time</th>
+        <th class="num">Monthly</th>
+      </tr>
+      <tr><td><span class="swatch" style="background:var(--c1)"></span>1 — Scraping</td><td class="num">$15–105</td><td class="num">$0</td></tr>
+      <tr><td><span class="swatch" style="background:var(--c2)"></span>2 — Embeddings + DB</td><td class="num">$0.10–0.60</td><td class="num">$50–130</td></tr>
+      <tr><td><span class="swatch" style="background:var(--c3)"></span>3 — Chatbot LLM</td><td class="num">$0</td><td class="num">$15–650</td></tr>
+      <tr><td><span class="swatch" style="background:var(--c4)"></span>4 — Hosting + WhatsApp</td><td class="num">$0</td><td class="num">$55–190</td></tr>
+      <tr><td><span class="swatch" style="background:var(--c5)"></span>5 — Bonus features</td><td class="num">$0</td><td class="num">$5–40</td></tr>
+      <tr><td>Total</td><td class="num">~$15–105</td><td class="num">~$100–1,000+/mo</td></tr>
+    </table>
+  </div>
+
+  <!-- PREBUILT VENDORS -->
+  <div class="vendors">
+    <div class="phase-head" style="margin-bottom:0;">
+      <span class="pill" style="background:var(--cv)">Alternative</span>
+      <span class="phase-title">Skip the build — prebuilt platforms</span>
+    </div>
+    <div class="vendor-row">
+      <div class="vcard">
+        <div class="vname">Chatbase</div>
+        <div class="vprice">Free – $399/mo</div>
+        <div class="vdesc">Upload product data/URLs, auto-builds RAG knowledge base — skips Phase 2–3. Higher tiers needed at 8,000+ chats/mo. Bring your own WhatsApp wiring.</div>
+      </div>
+      <div class="vcard">
+        <div class="vname">Zipchat</div>
+        <div class="vprice">Free – $129–349/mo</div>
+        <div class="vdesc">Auto-crawls catalog, does Q&amp;A, recommendations, and WhatsApp/Instagram natively — replaces Phases 1–4 on Shopify/WooCommerce at higher volume tiers.</div>
+      </div>
+      <div class="vcard">
+        <div class="vname">Tidio (Lyro)</div>
+        <div class="vprice">Free – $749/mo</div>
+        <div class="vdesc">AI agent built on Claude, trained on your content, ~67% claimed resolution rate for ecommerce queries; cost scales with conversation volume.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot-note">
+    Estimates assume ~8,000 products (~600 tokens/page) and 8,000–10,000 conversations/month at ~6 exchanges each, with production-grade (paid-tier) database and hosting rather than free tiers. Recalculate linearly for your actual catalog size and chat volume. Pricing reflects publicly listed rates as of June 2026 and excludes labor/dev cost per your request.
+  </div>
+
+</div>
+</body>
+</html>

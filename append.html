@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" placeholder="Enter list itme" id="listitem">
+    <button id="myBtn">my btn</button>
+
+    <ul id="mylist">
+        <li>list item one</li>
+        <li>list item one</li>
+        <li>list item one</li>
+    </ul>
+    
+
+
+    <script>
+        const mybtn= document.getElementById("myBtn")
+        mybtn.addEventListener('click',()=>{
+
+
+            const mylist= document.getElementById("mylist").children[0]
+            console.log(mylist);
+            
+
+            // let myinput= document.getElementById("listitem").value;
+            // let myli= document.createElement('li')
+            // myli.innerHTML=myinput
+            // mylist.append(myli)
+        })
+    </script>
+</body>
+</html>

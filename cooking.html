@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Ubuntu', sans-serif;
+        box-sizing: border-box;
+    }
+    .bg-primary{
+        background-color: #f50537;
+    }
+    .text-primary{
+        color: #f50537 !important;
+    }
+    .container{
+        width: 80%;
+        margin: 0px auto;
+    }
+    .flex{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .header{
+        background-color: transparent;
+        line-height: 60px;
+        position: fixed;
+        width: 100%;
+        color: white ;
+        top: 0;
+        left: 0;
+        z-index: 999;
+    }
+    .navbar-items ul li a{
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .navbar-items ul li{
+        list-style: none;
+        padding: 8px 12px;
+    }
+    .form-group input{
+        padding: 8px 12px;
+        font-size: 18px;
+        border: 2px solid rgb(173, 173, 183);
+        border-radius: 50px 0px 0px 50px;
+        border-right: none;
+    }
+    .form-group button{
+        font-size: 18px;
+        color: white;
+        padding: 9px;
+        border: none;
+        border-radius: 0px 50px 50px 0px;
+    }
+
+    .slider{
+        width: 100%;
+        height: 800px;
+        background-position:center;
+        background-size:cover;
+        background-image: url('https://p.w3layouts.com/demos_new/template_demo/22-10-2022/cooking-liberty-demo_Free/322220606/web/assets/images/banner1.jpg');
+    }
+
+.overlay{
+    width: 100%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0.203);
+    position: absolute;
+}
+
+.content{
+    text-align: center;
+    line-height: 60px;
+    color: white;
+}
+.image-group{
+    gap: 20px;
+    margin-top: 50px;
+}
+.image-group img{
+    width: 400px;
+    border-radius: 10px;
+
+}
+.Manual button{
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+    border: none;
+    border-radius: 50%;
+    color: white  ;
+
+}
+
+</style>
+</head>
+<body>
+    
+    <div class="header">
+        <div class="container flex">
+            <div class="brand-log">
+                <h1>Cooking <i class="fas fa-bread-slice ms-1"></i></h1>
+            </div>
+            <div class="navbar-items flex">
+            <nav>
+                <ul class="flex">
+                    <li><a href="" class="text-primary">Home</a></li>
+                    <li><a href="">About </a></li>
+                    <li><a href="">Classes</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Pages</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="form-group flex">
+                <form class="flex">
+                    <input type="search" name="search" id="search" placeholder="Enter keywords...">
+                    <button class="bg-primary"><i class="fas fa-search"></i></button>
+                </form>
+                <i class="fa-regular fa-moon"></i>
+            </div>
+       </div>
+        </div>
+
+    </div>
+    <div class="slider flex">
+        <div class="overlay">
+
+        </div>
+        <div class="container">
+            <div class="content">
+                <h5>Cooking is Easy</h5>
+                <h3>Passion For Cooking</h3>
+                <p>Helping You To Be Chef at Your Own House</p>
+                <button>Learn More</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="Learn-section">
+        <div class="container flex">
+
+      
+        <div class="text-conten">
+            <h3>Learn how to cook from your house</h3>
+            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.
+                Mumquam eius modi tempora incidunt ut labore et.</p>
+        
+        <div class="content-group flex">
+            <div class="Manual">
+              <button class="bg-primary"><i class="fas fa-utensils"></i></button>  
+                <h4>Easy Manual</h4>
+                <p>Sed ut perspiciatis unde omnis iste natus.</p>
+            </div>
+            <div class="Manual">
+                <i class="fas fa-utensils bg-primary"></i>
+                <h4>Easy Manual</h4>
+                <p>Sed ut perspiciatis unde omnis iste natus.</p>
+            </div>
+        </div>
+        </div>
+        <div class="image-group flex">
+            <img src="https://p.w3layouts.com/demos_new/template_demo/22-10-2022/cooking-liberty-demo_Free/322220606/web/assets/images/about1.jpg" alt="" >
+            <img src="https://p.w3layouts.com/demos_new/template_demo/22-10-2022/cooking-liberty-demo_Free/322220606/web/assets/images/about2.jpg" alt="" >
+        </div>
+    </div>
+
+    </div>
+
+
+</body>
+</html>

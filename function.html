@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        //     function clickme(a,b){
+        //         let mul=a*b
+        //         return mul
+        //         console.log("Hello class",mul);
+        //     }
+        //    const myval= clickme(24,12)
+        //    console.log(myval);
+
+
+        // function  hello(){
+        //     console.log("Hello");
+
+        // }
+
+
+        const myval = (() => {
+            return 4 * 3
+        })
+
+        console.log(myval());
+
+
+        const myFunction = new Function("x", "y", "return x * y");
+        console.log(myFunction(4, 4));
+
+
+        //   function myFunction(x, y) {
+        //             return x * y;
+        //         }
+
+        const obj = {
+            myFunction(x, y) {
+                return x * y;
+            },
+            newfunction(x, y) {
+                return x - y;
+            },
+            myname: "ravi"
+        };
+
+        console.log(obj.myFunction(7, 4));
+        console.log(obj.myname);
+
+
+        const multiply = function (a, b) { return a * b };
+
+        console.log(multiply(3, 3));
+
+
+        const x = function (a, b) { return a * b };
+
+        let z = x(4, 3);
+
+        console.log(z);
+
+
+        // const sum = add(2, 3); // ⛔ Will generate error
+
+        // const add = function (a, b) { return a + b; };
+
+        // console.log(username);
+
+        // const username='ravi kumar'
+
+
+        // function multiply1(a, b) {
+        //     return a * b;
+        // }
+
+        // let text = multiply1.toString();
+
+        // console.log(typeof(text));
+
+
+
+        function myCalculator(num1, num2, myCallback) {
+            let sum = num1 + num2;
+            console.log(sum);
+
+            myCallback(sum);
+        }
+
+        myCalculator(5, 5, myDisplayer);
+
+
+        function myDisplayer(some) {
+            document.write(some)
+        }
+
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            fullName: function () {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+
+        person.fullName();
+
+        console.log(person.firstName);
+
+
+
+        function myFunction1() {
+            return this;
+        }
+
+        // console.log(myFunction1());
+
+
+
+        // function myfun(username){
+        //     console.log("Hello", username);   
+        // }
+
+        // myfun(["ravi","kumar","singh"]);
+
+        const myArr = [0, 1, 2, 3, 4, 5, 8]
+
+
+        // console.log("slice the array", myArr.slice(1, 4));
+        // console.log("splic the array", myArr.splice(1, 4));
+
+
+
+        const myarrlength = myArr.length
+        console.log("my array ", myArr[myarrlength - 1]);
+
+        // myArr.push(6)
+        // console.log(myArr);
+
+        // myArr.pop()
+        // console.log(myArr);
+
+        myArr.shift()
+        // console.log(myArr);
+
+        // console.log(myArr.includes(9));
+        // console.log(myArr.indexOf(9));
+
+        // console.log(myArr.join(" "));
+
+        const myArr1 = myArr
+
+        myArr.push(9)
+
+
+        // console.log("copy ", myArr1);
+
+
+        const marvel_heros = ["thor", "Ironman", "spiderman"]
+        const dc_heros = ["superman", "flash", "batman"]
+
+        // marvel_heros.push(dc_heros)
+
+        // console.log(marvel_heros[3][1]);
+
+        const mynewarr=[3,4,3,[3,4,6,[3,4,5]]]
+
+        const myfinal= mynewarr.flat(Infinity)
+        console.log(myfinal)
+        
+
+        const allHeros = marvel_heros.concat(dc_heros)
+        console.log(allHeros);
+
+        console.log("ALL heros ",allHeros);
+        const newallHeros= [...allHeros, ...mynewarr]
+        
+        allHeros.push("hulk")
+        
+        console.log("new all heros",newallHeros);
+        
+
+
+        console.log(Array.isArray(["Hitesh"]))
+        console.log(Array.from("Hitesh"))
+        console.log(Array.from({name: "hitesh"}))
+        console.log(Array.from({length: 3}))
+
+        let score1 = 100
+let score2 = 200
+let score3 = 300
+
+console.log(Array.of(score1, score2, score3));
+        
+
+        
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

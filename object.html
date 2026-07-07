@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let obj = {
+            name: 'vijay',
+            rollno: 123,
+            class: 'MCA',
+            subjects: ['maths', 'science', 'english'],
+            disabled: false,
+            myFun: function sayHello() {
+                console.log('Hello');
+                return 'done'
+            },
+            edu: {
+                college: 'ABC College',
+                year: 2021
+            }
+
+        }
+
+
+        let student=[
+            {name:'vijay',rollno:123,class:'MCA'},
+            {name:'ravi',rollno:123,class:'MCA'},
+            {name:'Sumit',rollno:123,class:'MCA'},
+            {name:'Deepak',rollno:123,class:'MCA'},
+            {name:'Pawan',rollno:123,class:'MCA'},
+            {name:'Raju',rollno:123,class:'MCA'},
+        ]
+
+        // for(i=0;i<student.length;i++){
+        //     console.log(student[i].name);
+        // }
+
+        // for (let i in student) {
+        //     console.log(i);
+        // }
+
+        // for(let i of student){
+        //     console.log(i);
+        // }
+
+        // student.forEach((value, index)=>{
+        //     console.log(value);
+        // })
+         student.map((value, index)=>{
+            console.log(value);
+        })
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

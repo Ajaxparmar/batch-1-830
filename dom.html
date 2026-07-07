@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Hello class</h1>
+    <h1>Hello class</h1>
+    <h1>Hello class</h1>
+    <h1>Hello class</h1>
+
+
+    <div class="content">
+        <h2>this is h2 first</h2>
+    </div>
+
+
+    <div class="content">
+        <h2>this is h2</h2>
+    </div>
+    <div class="content">
+        <h2>this is h4</h2>
+    </div>
+
+    <button onmouseenter="changeColor()">change</button>
+
+
+    <button onmousedown="timer()" onmouseup="timer()">press</button>
+
+
+   <span id="sec"></span>:<span id="timer"></span>
+
+
+
+    <script>
+
+        let count = 0
+        let flag = false
+        let myinterval
+        let sec=0
+
+        function timer() {
+            if (!flag) {
+                myinterval = setInterval(caltimer, 100)
+                flag = true
+            }
+            else {
+                clearInterval(myinterval)
+                flag=false
+            }
+        }
+        function caltimer() {
+            count++
+            document.getElementById("timer").innerHTML = count;
+            if(count==10)
+        {
+            sec++;
+            document.getElementById("sec").innerHTML=sec
+            count=0
+        }
+        }
+
+        function changeColor() {
+            console.log("Move");
+
+            const element = document.querySelectorAll('.content');
+            element[0].style.color = "red"
+            element[0].style.backgroundColor = "yellow"
+            element[0].innerHTML = "Good Morning"
+        }
+
+        // const div= document.getElementsByClassName('content');
+        // console.log(div);
+        // div[0].style.backgroundColor="green"    
+
+
+        const mydiv = document.querySelector('.content');
+        console.log(mydiv);
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
