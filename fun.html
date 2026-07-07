@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function checklist(callBack){
+            setTimeout(()=>{
+                console.log("check list");
+                const error= new Error("this is an error")
+                const datalist=10
+                callBack(error,10)
+            },1000)
+          
+            
+        }
+        function placeorder(callBack)
+            {
+                setTimeout(()=>{
+                    console.log("order placed");
+                    callBack()
+                },2000)
+                
+            }
+        function payments(callBack)
+        {
+            setTimeout(()=>{
+                console.log("payment done");
+                callBack()
+            },1000)
+            
+        }
+        function invoice()
+            {
+             setTimeout(()=>{
+                console.log("Invoice generate");
+             },2000)
+                
+            }
+
+            checklist((err,list)=>{
+                if(err)
+            {
+                console.log(err); 
+            }
+            else{
+                console.log(list);
+                
+            }
+                
+                placeorder(()=>{
+                    payments(()=>{
+                        invoice()
+                    })
+                })
+            })
+          
+            
+
+
+    </script>
+
+
+
+</head>
+<body>
+    
+</body>
+</html>

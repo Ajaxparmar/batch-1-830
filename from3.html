@@ -58,12 +58,9 @@
             let validate=true
             clearError();
             const myForm= document.forms["RegisterForm"]
-
-            const divname= myForm["FirstName"].value
-            console.log(divname);
             
            
-            if(myForm["Fname"].value=="" || myForm["Fname"].value.length<4) 
+            if(myForm["Fname"].value=="") 
                 {
                     error[0].innerHTML="Name is requird"
                     validate= false;
@@ -79,10 +76,7 @@
         }
 
 
-        function seterror(id, msg)
-        {
-
-        }
+   
 
 
         function clearError()
